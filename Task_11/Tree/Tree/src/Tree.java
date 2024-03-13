@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 
 public class Tree {
     public class Node {
@@ -111,5 +111,57 @@ public class Tree {
         descendingOrder(root.leftChild);
 
 
+    }
+
+    private boolean isLeaf(Node node) {
+        return node.leftChild == null && node.rightChild == null;
+
+    }
+
+    public int height(Node root) {
+        if (root == null) {
+            return -1;
+        }
+        if (isLeaf(root)) {
+            return 0;
+        }
+        return 1 + Math.max(height(root.leftChild), height(root.rightChild));
+    }
+
+    public boolean equals(Tree tree) {
+        return equals(root, tree.root);
+    }
+
+    private boolean equals(Node root1, Node root2) {
+        if (root1 == null && root2 == null) {
+            return true;
+        }
+        if (root1 != null && root2 != null) {
+            return root1.value == root2.value && equals(root1.rightChild, root2.rightChild) && equals(root1.leftChild, root2.leftChild);
+        }
+        return false;
+    }
+
+    public void kthElementFromRoot(Node root, int distance, ArrayList<Integer> arrayList) {
+        if (root == null)
+            return;
+        if (distance == 0) {
+            arrayList.add(root.value);
+            return;
+        }
+        kthElementFromRoot(root.leftChild, distance - 1, arrayList);
+        kthElementFromRoot(root.rightChild, distance - 1, arrayList);
+
+    }
+
+    void levelOrder(Node root) {
+        if (root == null)
+            return;
+        int treeHeight = height(root);
+        for (int i = 0; i <= treeHeight; i++) {
+            ArrayList<Integer> list = new ArrayList<>();
+            kthElementFromRoot(root, i, list);
+            System.out.println(list);
+        }
     }
 }

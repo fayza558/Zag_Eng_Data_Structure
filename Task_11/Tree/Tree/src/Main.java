@@ -19,5 +19,8 @@ public class Main {
         System.out.println("");
         tree.descendingOrder(tree.root);
         System.out.println("");
+        System.out.println("The height = " + tree.height(tree.root));
+
+
     }
 }
