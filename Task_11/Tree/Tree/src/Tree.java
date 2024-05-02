@@ -13,19 +13,36 @@ public class Tree {
 
     Node root;
 
-    public void insert(int value) {
-        Node node = new Node(value);
-        if (root == null) {
-            root = node;
-        } else {
-            Node parent = getParent(value);
-            if (value >= parent.value) {
-                parent.rightChild = node;
+    /*
+        public void insert(int value) {
+            Node node = new Node(value);
+            if (root == null) {
+                root = node;
             } else {
-                parent.leftChild = node;
+                Node parent = getParent(value);
+                if (value >= parent.value) {
+                    parent.rightChild = node;
+                } else {
+                    parent.leftChild = node;
+                }
             }
         }
+        */
+    //implementation fun insert using recursion
+    public void insert(int value) {
+        root = insert(root, value);
     }
+
+    private Node insert(Node node, int value) {
+        if (node == null)
+            return new Node(value);
+        else if (value >= node.value)
+            node.rightChild = insert(node.rightChild, value);
+        else
+            node.leftChild = insert(node.leftChild, value);
+        return node;
+    }
+
 
     public Node getParent(int value) {
         Node current = root;

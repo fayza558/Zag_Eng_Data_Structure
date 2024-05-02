@@ -20,7 +20,11 @@ public class Main {
         tree.descendingOrder(tree.root);
         System.out.println("");
         System.out.println("The height = " + tree.height(tree.root));
-
+        AVL avl =new AVL ();
+        avl.insert(10);
+        avl.insert(20);
+        avl.insert(30);
+        System.out.println("");
 
     }
 }
